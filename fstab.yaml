@@ -1,5 +1,5 @@
 mountpoints:
   /: 
-    url: https://author-p130746-e1298459.adobeaemcloud.com/bin/franklin.delivery/chis-adobe/securbank/main
+    url: https://author-p153659-e1614585.adobeaemcloud.com/bin/franklin.delivery/chis-adobe/securbank/main
     type: markup
     suffix: ".html?wcmmode=disabled"
