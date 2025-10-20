@@ -287,7 +287,7 @@
 
 .wide-cards .cards-card-body ul li::before {
     content: "•"; 
-    color: #0296A6;
+    color: var(--bullet-color);
     font-size: 48px;
     line-height: 24px;
     display: inline-block; width: 1em;
