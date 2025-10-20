@@ -290,8 +290,10 @@
     color: var(--bullet-color);
     font-size: 48px;
     line-height: 24px;
-    display: inline-block; width: 1em;
-    margin-left: -1em}
+    display: inline-block;
+    width: 1em;
+    margin-left: -1em;
+}
 
 
 .cards-wrapper:has(.wide-cards) {
