@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>{{properties.title}}</title>
+  </head>
+  <body>
+    <header></header>
+    <main>
+      <div>
+        <div class="hero">
+          <div>
+            <div>
+              <p>
+                <picture>
+                  <img src="{{{properties.elements.heroImage}}}">
+                </picture>
+              </p>
+              <h1>{{properties.elements.headline.value}}</h1>
+            </div>
+          </div>
+        </div>
+        <p><strong>Author:</strong> {{properties.elements.pretitle.value}}</p>
+        <div class="columns">
+          <div>
+            <div>
+              <p>
+                {{properties.elements.detail.value}}
+              </p>
+            </div>
+            <div>
+              <a href="{{{properties.elements.ctaUrl.value}}}">{{properties.elements.callToAction.value}}</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+    <footer></footer>
+  </body>
+</html>
