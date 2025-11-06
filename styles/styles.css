@@ -18,7 +18,7 @@
 
  :root {
   /* colors */
-  --main-color: red;
+  --main-color: blue;
   --bullet-color: var(--main-color);
   --link-color: var(--main-color);
   --link-hover-color: #3E6470;
