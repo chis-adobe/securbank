@@ -164,6 +164,25 @@
     ]
   },
   {
+    "id": "creditcard",
+    "fields": [
+      {
+        "component": "aem-content-fragment",
+        "name": "creditcardpath",
+        "value": "",
+        "label": "Credit Card Content Fragment path",
+        "valueType": "string"
+      },
+      {
+        "component": "text-input",
+        "name": "variation",
+        "value": "",
+        "label": "Variation",
+        "valueType": "string"
+      }
+    ]
+  },
+  {
     "id": "faq",
     "fields": [
       {

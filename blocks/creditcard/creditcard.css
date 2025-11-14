@@ -1,0 +1,226 @@
+/* Credit Card Detail Styles */
+
+.creditcard {
+  width: 100%;
+}
+
+.credit-card-detail.columns-container {
+  margin-bottom: 40px;
+}
+
+.credit-card-detail .columns-wrapper {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.credit-card-detail .columns.columns-2-cols > div {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 30px;
+  align-items: center;
+}
+
+@media (width >= 768px) {
+  .credit-card-detail .columns.columns-2-cols > div {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.credit-card-detail h1 {
+  font-size: 32px;
+  font-weight: 700;
+  line-height: 1.2;
+  margin-bottom: 20px;
+  color: #2c2c2c;
+}
+
+@media (width >= 768px) {
+  .credit-card-detail h1 {
+    font-size: 42px;
+  }
+}
+
+.credit-card-detail p {
+  font-size: 16px;
+  line-height: 1.6;
+  color: #4a4a4a;
+  margin-bottom: 15px;
+}
+
+.credit-card-detail strong {
+  font-weight: 700;
+  color: #2c2c2c;
+}
+
+.credit-card-detail em {
+  font-style: italic;
+  color: #666;
+}
+
+.credit-card-detail .button-container {
+  margin-top: 20px;
+}
+
+.credit-card-detail .button {
+  display: inline-block;
+  padding: 12px 30px;
+  background-color: #d91e18;
+  color: #fff;
+  text-decoration: none;
+  font-weight: 600;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+}
+
+.credit-card-detail .button:hover {
+  background-color: #b71812;
+}
+
+.credit-card-detail .columns-img-col {
+  text-align: center;
+}
+
+.credit-card-detail .columns-img-col picture {
+  display: inline-block;
+}
+
+.credit-card-detail .columns-img-col img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Cards Container Styles */
+
+.credit-card-detail.cards-container {
+  background-color: #f5f5f5;
+  padding: 60px 20px;
+}
+
+.credit-card-detail.cards-container .default-content-wrapper {
+  max-width: 1200px;
+  margin: 0 auto 40px;
+  text-align: center;
+}
+
+.credit-card-detail.cards-container h2 {
+  font-size: 36px;
+  font-weight: 700;
+  color: #2c2c2c;
+  margin-bottom: 40px;
+}
+
+.credit-card-detail .cards-wrapper {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.credit-card-detail .cards ul {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 30px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+@media (width >= 600px) {
+  .credit-card-detail .cards ul {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (width >= 900px) {
+  .credit-card-detail .cards ul {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.credit-card-detail .cards li {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.credit-card-detail .cards li:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.credit-card-detail .cards-card-image {
+  padding: 30px;
+  text-align: center;
+  background-color: #fafafa;
+}
+
+.credit-card-detail .cards-card-image img {
+  max-width: 72px;
+  height: auto;
+  display: inline-block;
+}
+
+.credit-card-detail .cards-card-body {
+  padding: 20px;
+}
+
+.credit-card-detail .cards-card-body h4 {
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1.4;
+  margin-bottom: 10px;
+  color: #2c2c2c;
+}
+
+.credit-card-detail .cards-card-body p {
+  font-size: 14px;
+  line-height: 1.5;
+  color: #666;
+  margin: 0;
+}
+
+.credit-card-detail .cards-card-body em {
+  font-style: italic;
+  font-size: 13px;
+}
+
+/* Icon styles from benefitsSummaryRich */
+.card-icon-diamond,
+.card-icon-umbrella,
+.card-icon-price-tag {
+  position: relative;
+  padding-left: 20px;
+}
+
+.icon-copy-item-container {
+  margin-bottom: 20px;
+}
+
+.icon-copy-title {
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 8px;
+  color: #2c2c2c;
+}
+
+.icon-copy-text {
+  font-size: 14px;
+  line-height: 1.6;
+  color: #4a4a4a;
+}
+
+/* Split horizontal flex for card details */
+.split-horizontal-flex {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.card-detail-value {
+  font-weight: 700;
+  color: #d91e18;
+}
+
