@@ -141,6 +141,13 @@
         "value": "",
         "label": "Text",
         "valueType": "string"
+      },
+      {
+        "component": "text-input",
+        "name": "tagId",
+        "value": "",
+        "label": "Tag Id",
+        "valueType": "string"
       }
     ]
   },
@@ -171,10 +178,7 @@
         "name": "creditcardpath",
         "value": "",
         "label": "Credit Card Content Fragment path",
-        "valueType": "string",
-        "meta": {
-          "browseRoot": "/content/dam/securbank/en/cards"
-        }
+        "valueType": "string"
       },
       {
         "component": "text-input",

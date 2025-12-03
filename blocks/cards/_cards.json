@@ -48,6 +48,13 @@
           "value": "",
           "label": "Text",
           "valueType": "string"
+        },
+        {
+          "component": "text-input",
+          "name": "tagId",
+          "value": "",
+          "label": "Tag Id",
+          "valueType": "string"
         }
       ]
     }

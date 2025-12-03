@@ -7,11 +7,35 @@ export default function decorate(block) {
   [...block.children].forEach((row) => {
     const li = document.createElement('li');
     moveInstrumentation(row, li);
+    
+    // Extract tagId before moving children (3rd cell if exists)
+    let tagId = null;
+    const cells = [...row.children];
+    if (cells.length >= 3) {
+      const tagIdCell = cells[2];
+      tagId = tagIdCell.textContent.trim();
+    }
+    
     while (row.firstElementChild) li.append(row.firstElementChild);
-    [...li.children].forEach((div) => {
-      if (div.children.length === 1 && div.querySelector('picture')) div.className = 'cards-card-image';
-      else div.className = 'cards-card-body';
+    
+    [...li.children].forEach((div, index) => {
+      if (div.children.length === 1 && div.querySelector('picture')) {
+        div.className = 'cards-card-image';
+      } else if (index === 2 && tagId) {
+        // This is the tagId cell, hide it
+        div.style.display = 'none';
+      } else {
+        div.className = 'cards-card-body';
+      }
     });
+    
+    // Apply tagId to anchor tags within this card
+    if (tagId) {
+      li.querySelectorAll('a').forEach((a) => {
+        a.setAttribute('data-tag-id', tagId);
+      });
+    }
+    
     ul.append(li);
   });
   ul.querySelectorAll('img').forEach((img) => {
