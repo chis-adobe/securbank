@@ -28,9 +28,16 @@ export default async function decorate(block) {
 
   const itemId = `urn:aemconnection:${offerpath}/jcr:content/data/master`;
 
+  // Create mobile Scene7 URL from dynamic URL
+  const dynamicUrl = cfReq.heroImage._dynamicUrl;
+  const filename = dynamicUrl.split('/').pop(); // Get last part of URL (e.g., "banner_400.jpg")
+  const filenameWithoutExt = filename.replace(/\.[^/.]+$/, ''); // Remove extension
+  const mobileImageUrl = `https://s7d1.scene7.com/is/image/LiviuChisNA001/${filenameWithoutExt}:Small`;
+  const desktopImageUrl = aempublishurl + dynamicUrl;
+
   block.innerHTML = `
   <div class='rbc-offer-container' data-aue-resource=${itemId} data-aue-label="offer content fragment" data-aue-type="reference" data-aue-filter="cf">
-      <div class='rbc-offer-background' style="background-image: url(${aempublishurl + cfReq.heroImage._dynamicUrl});">
+      <div class='rbc-offer-background' data-mobile-bg="${mobileImageUrl}" data-desktop-bg="${desktopImageUrl}">
         <div class='rbc-offer-overlay'></div>
         <div class='rbc-offer-content'>
           <div data-aue-prop="pretitle" data-aue-label="pretitle" data-aue-type="text" class='rbc-offer-pretitle'>${cfReq.pretitle}</div>
@@ -47,5 +54,21 @@ export default async function decorate(block) {
       </div>
   </div>
 `;
+
+  // Set background image based on viewport size
+  const backgroundEl = block.querySelector('.rbc-offer-background');
+  const updateBackgroundImage = () => {
+    if (window.innerWidth >= 768) {
+      backgroundEl.style.backgroundImage = `url(${desktopImageUrl})`;
+    } else {
+      backgroundEl.style.backgroundImage = `url(${mobileImageUrl})`;
+    }
+  };
+
+  // Set initial background
+  updateBackgroundImage();
+
+  // Update on resize
+  window.addEventListener('resize', updateBackgroundImage);
 }
 
