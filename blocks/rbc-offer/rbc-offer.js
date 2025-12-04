@@ -28,12 +28,12 @@ export default async function decorate(block) {
 
   const itemId = `urn:aemconnection:${offerpath}/jcr:content/data/master`;
 
-  // Create mobile Scene7 URL from dynamic URL
-  const dynamicUrl = cfReq.heroImage._dynamicUrl;
-  const filename = dynamicUrl.split('/').pop(); // Get last part of URL (e.g., "banner_400.jpg")
+  // Create mobile Scene7 URL from publish URL
+  const publishUrl = cfReq.heroImage._publishUrl;
+  const filename = publishUrl.split('/').pop(); // Get last part of URL (e.g., "banner-400.jpg")
   const filenameWithoutExt = filename.replace(/\.[^/.]+$/, ''); // Remove extension
   const mobileImageUrl = `https://s7d1.scene7.com/is/image/LiviuChisNA001/${filenameWithoutExt}:Small`;
-  const desktopImageUrl = aempublishurl + dynamicUrl;
+  const desktopImageUrl = aempublishurl + cfReq.heroImage._dynamicUrl;
 
   block.innerHTML = `
   <div class='rbc-offer-container' data-aue-resource=${itemId} data-aue-label="offer content fragment" data-aue-type="reference" data-aue-filter="cf">
