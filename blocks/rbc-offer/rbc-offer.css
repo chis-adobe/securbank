@@ -51,13 +51,14 @@
   border-radius: 2px;
 }
 
+.rbc-offer-content .rbc-offer-headline,
 .rbc-offer-headline {
   font-size: 32px;
   font-weight: 700;
   line-height: 1.2;
   margin: 0 0 12px 0;
   color: #fff;
-  text-align: left;
+  text-align: left !important;
 }
 
 .rbc-offer-detail {
@@ -145,10 +146,11 @@
     margin-bottom: 20px;
   }
 
+  .rbc-offer-content .rbc-offer-headline,
   .rbc-offer-headline {
     font-size: 48px;
     margin-bottom: 16px;
-    text-align: left;
+    text-align: left !important;
   }
 
   .rbc-offer-detail {
@@ -187,9 +189,10 @@
     max-width: 700px;
   }
 
+  .rbc-offer-content .rbc-offer-headline,
   .rbc-offer-headline {
     font-size: 56px;
-    text-align: left;
+    text-align: left !important;
   }
 
   .rbc-offer-detail {
