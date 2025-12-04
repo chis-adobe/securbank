@@ -1,13 +1,13 @@
 {
   "mappings": [
+    "/content/securbank/configuration:/.helix/config.json",
+    "/content/securbank/configuration:/config.json",
     "/content/securbank/en/:/",
     "/content/securbank/fr/:/fr/",
     "/content/securbank/en/placeholders:/placeholders.json",
     "/content/securbank/en/loans/mortgagecalc:/mortgagecalc.json",
     "/graphql:/graphql",
-    "/content/securbank.resource/icons/:/icons/",
-    "/content/securbank/configuration:/.helix/config.json",
-    "/content/securbank/configuration:/config.json"
+    "/content/securbank.resource/icons/:/icons/"
   ],
   "includes": [
     "/content/securbank/en/",
