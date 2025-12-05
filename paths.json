@@ -1,6 +1,7 @@
 {
   "mappings": [
     "/content/securbank/en/:/",
+    "/content/securbank/fr/:/fr/",
     "/content/securbank/en/placeholders:/placeholders.json",
     "/content/securbank/en/loans/mortgagecalc:/mortgagecalc.json",
     "/graphql:/graphql",
