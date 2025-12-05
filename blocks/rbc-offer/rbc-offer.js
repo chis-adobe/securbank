@@ -33,7 +33,7 @@ export default async function decorate(block) {
   const filename = publishUrl.split('/').pop(); // Get last part of URL (e.g., "banner-400.jpg")
   const filenameWithoutExt = filename.replace(/\.[^/.]+$/, ''); // Remove extension
   const mobileImageUrl = `https://s7d1.scene7.com/is/image/LiviuChisNA001/${filenameWithoutExt}:Small`;
-  const desktopImageUrl = aempublishurl + cfReq.heroImage._dynamicUrl;
+  const desktopImageUrl = publishUrl;
 
   // Generate tag ID for Google Analytics
   const pageName = document.title || window.location.pathname.split('/').filter(Boolean).pop() || 'home';

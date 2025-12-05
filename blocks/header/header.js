@@ -114,7 +114,9 @@ export function decorateNavAuth() {
 export default async function decorate(block) {
   // load nav as fragment
   const navMeta = getMetadata('nav');
-  const navPath = navMeta ? new URL(navMeta).pathname : '/nav';
+  const isFrench = window.location.pathname.includes('/fr/');
+  const defaultNavPath = isFrench ? '/fr/nav' : '/nav';
+  const navPath = navMeta ? new URL(navMeta).pathname : defaultNavPath;
   const fragment = await loadFragment(navPath);
 
   // decorate nav DOM
