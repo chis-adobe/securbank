@@ -26,6 +26,10 @@ footer .footer p {
 
 }
 
+footer .footer img {
+  height: auto;
+}
+
 footer .columns ul {
   list-style-type: none;
   padding: 0;
