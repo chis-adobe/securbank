@@ -285,6 +285,13 @@
             "value": "EUR"
           }
         ]
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "colour",
+        "value": "",
+        "label": "Background Colour"
       }
     ]
   },
