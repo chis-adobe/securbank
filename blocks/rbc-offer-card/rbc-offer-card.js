@@ -22,8 +22,8 @@ export default async function decorate(block) {
   if (!offerpath) return;
 
   const url = window.location?.origin?.includes('author')
-    ? `${aemauthorurl}${persistedquery};path=${encodeURIComponent(offerpath)};ts=${Math.random() * 1000}`
-    : `${aempublishurl}${persistedquery};path=${encodeURIComponent(offerpath)};ts=${Math.random() * 1000}`;
+    ? `${aemauthorurl}${persistedquery};path=${offerpath};ts=${Math.random() * 1000}`
+    : `${aempublishurl}${persistedquery};path=${offerpath};ts=${Math.random() * 1000}`;
   const options = { credentials: 'include' };
 
   const cfReq = await fetch(url, options)
