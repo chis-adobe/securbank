@@ -37,9 +37,8 @@ export default async function decorate(block) {
   const descriptionHtml = cfReq.description?.html || '';
   const ctaText = cfReq.ctaText || 'Open an Account';
   const ctaUrl = cfReq.ctaUrl || '#';
-  const imageUrl = cfReq.image?._publishUrl || cfReq.illustration?._publishUrl || cfReq.image?._dynamicUrl
-    ? (cfReq.image?._publishUrl || cfReq.illustration?._publishUrl || `${aempublishurl}${cfReq.image?._dynamicUrl || cfReq.illustration?._dynamicUrl}`)
-    : '';
+  const image = cfReq.image;
+  const imageUrl = image?._publishUrl || (image?._dynamicUrl ? `${aempublishurl}${image._dynamicUrl}` : '');
 
   const pageName = (document.title || window.location.pathname.split('/').filter(Boolean).pop() || 'home')
     .toLowerCase().replace(/\s+/g, '-');
@@ -64,7 +63,7 @@ export default async function decorate(block) {
         </div>
         <a href="${ctaUrl}" class="rbc-offer-card-cta" data-tag-id="${tagId}" data-aue-prop="cta" data-aue-label="CTA">${ctaText}</a>
       </div>
-      ${imageUrl ? `<div class="rbc-offer-card-image"><img src="${imageUrl}" alt="" loading="lazy"></div>` : ''}
+      ${imageUrl ? `<div class="rbc-offer-card-image" data-aue-prop="image" data-aue-label="Image" data-aue-type="media"><img src="${imageUrl}" alt="" loading="lazy"></div>` : ''}
     </div>
     ${disclaimerBlocks ? `<div class="rbc-offer-card-disclaimers">${disclaimerBlocks}</div>` : ''}
   </div>
