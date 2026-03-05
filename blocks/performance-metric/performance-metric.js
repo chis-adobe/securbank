@@ -40,18 +40,25 @@ export default async function decorate(block) {
   const descriptionHtml = data.description?.html || '';
   const dollar = data.dollar || '';
   const percent = data.percent || '';
+  const direction = (data.direction || '').toLowerCase();
   const imageName = getImageName(data.image);
 
-  const params = new URLSearchParams({
-    $image: `${ASSET_PREFIX}/${imageName}`,
-    $dollar: dollar,
-    $percent: percent,
-    wid: '2000',
-    hei: '2000',
-    qlt: '100',
-    fit: 'constrain',
-  });
-  const imageUrl = `${SCENE7_BASE}/PerformanceMetric?${params.toString()}`;
+  // Scene7 expects literal $ in param names and specific encoding of values
+  const dollarValue = dollar.startsWith('$') ? dollar : `$${dollar}`;
+  const directionEntity = direction === 'up' ? '&#8593;' : direction === 'down' ? '&#8595;' : '';
+  const percentValue = directionEntity ? `${directionEntity} ${percent}` : percent;
+  const imageValue = `${ASSET_PREFIX}/${imageName}`;
+
+  const query = [
+    `$dollar=${encodeURIComponent(dollarValue)}`,
+    `$percent=${encodeURIComponent(percentValue)}`,
+    `$image=${imageValue}`,
+    'wid=2000',
+    'hei=2000',
+    'qlt=100',
+    'fit=constrain',
+  ].join('&');
+  const imageUrl = `${SCENE7_BASE}/PerformanceMetric?${query}`;
 
   block.innerHTML = `
   <div class="performance-metric-wrapper" data-aue-resource="${itemId}" data-aue-label="performance metric content fragment" data-aue-type="reference" data-aue-filter="cf">
