@@ -1,5 +1,9 @@
 .performance-metric-wrapper {
+  width: 500px;
+  height: 500px;
   margin-bottom: 40px;
+  box-sizing: border-box;
+  overflow: hidden;
 }
 
 .performance-metric-image {
