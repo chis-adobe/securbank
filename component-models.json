@@ -4994,6 +4994,18 @@
     ]
   },
   {
+    "id": "performance-metric",
+    "fields": [
+      {
+        "component": "aem-content-fragment",
+        "name": "fragmentpath",
+        "value": "",
+        "label": "Performance Metric Content Fragment path",
+        "valueType": "string"
+      }
+    ]
+  },
+  {
     "id": "rbc-offer-card",
     "fields": [
       {

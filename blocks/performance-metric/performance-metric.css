@@ -1,0 +1,50 @@
+.performance-metric-wrapper {
+  margin-bottom: 40px;
+}
+
+.performance-metric-image {
+  margin-bottom: 16px;
+}
+
+.performance-metric-image img {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+}
+
+.performance-metric-content {
+  padding: 0 4px;
+}
+
+.performance-metric-title {
+  font-size: 22px;
+  font-weight: 700;
+  line-height: 1.3;
+  margin: 0 0 12px 0;
+  color: #2c2c2c;
+}
+
+.performance-metric-description {
+  font-size: 16px;
+  line-height: 1.5;
+  color: #4a4a4a;
+}
+
+.performance-metric-description p {
+  margin: 0 0 0.5em 0;
+}
+
+.performance-metric-description p:last-child {
+  margin-bottom: 0;
+}
+
+@media (width >= 768px) {
+  .performance-metric-title {
+    font-size: 26px;
+  }
+
+  .performance-metric-description {
+    font-size: 17px;
+  }
+}
