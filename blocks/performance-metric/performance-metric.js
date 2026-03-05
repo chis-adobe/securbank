@@ -40,18 +40,15 @@ export default async function decorate(block) {
   const descriptionHtml = data.description?.html || '';
   const dollar = data.dollar || '';
   const percent = data.percent || '';
-  const direction = (data.direction || '').toLowerCase();
   const imageName = getImageName(data.image);
 
   // Scene7 expects literal $ in param names and specific encoding of values
   const dollarValue = dollar.startsWith('$') ? dollar : `$${dollar}`;
-  const directionEntity = direction === 'up' ? '&#8593;' : direction === 'down' ? '&#8595;' : '';
-  const percentValue = directionEntity ? `${directionEntity} ${percent}` : percent;
   const imageValue = `${ASSET_PREFIX}/${imageName}`;
 
   const query = [
     `$dollar=${encodeURIComponent(dollarValue)}`,
-    `$percent=${encodeURIComponent(percentValue)}`,
+    `$percent=${encodeURIComponent(percent)}`,
     `$image=${imageValue}`,
     'wid=500',
     'hei=500',
