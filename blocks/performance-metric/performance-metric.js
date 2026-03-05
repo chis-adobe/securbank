@@ -53,8 +53,8 @@ export default async function decorate(block) {
     `$dollar=${encodeURIComponent(dollarValue)}`,
     `$percent=${encodeURIComponent(percentValue)}`,
     `$image=${imageValue}`,
-    'wid=2000',
-    'hei=2000',
+    'wid=500',
+    'hei=500',
     'qlt=100',
     'fit=constrain',
   ].join('&');
