@@ -5006,6 +5006,18 @@
     ]
   },
   {
+    "id": "performance-statement",
+    "fields": [
+      {
+        "component": "aem-content-fragment",
+        "name": "fragmentpath",
+        "value": "",
+        "label": "Performance Statement Content Fragment path",
+        "valueType": "string"
+      }
+    ]
+  },
+  {
     "id": "rbc-offer-card",
     "fields": [
       {
