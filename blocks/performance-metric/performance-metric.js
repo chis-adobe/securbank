@@ -51,7 +51,6 @@ export default async function decorate(block) {
     `$percent=${encodeURIComponent(percent)}`,
     `$image=${imageValue}`,
     'wid=500',
-    'hei=500',
     'qlt=100',
     'fit=constrain',
   ].join('&');
