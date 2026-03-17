@@ -86,15 +86,15 @@
   text-decoration: underline;
 }
 
-/* Container section: stack account-offer-card blocks */
-.section.account-offer-card-container > div {
+/* Container section: stack account-offer-card blocks (direct children are .account-offer-card-wrapper) */
+.section.account-offer-card-container {
   display: grid;
   grid-template-columns: 1fr;
   gap: 24px;
 }
 
 @media (width >= 768px) {
-  .section.account-offer-card-container > div {
+  .section.account-offer-card-container {
     grid-template-columns: repeat(2, 1fr);
   }
 }
