@@ -15,8 +15,8 @@ function collectDisclaimerHtml(disclaimer) {
 }
 
 export default async function decorate(block) {
-  const aempublishurl = getAEMPublish();
-  const aemauthorurl = getAEMAuthor();
+  const aempublishurl = await getAEMPublish();
+  const aemauthorurl = await getAEMAuthor();
   const persistedquery = '/graphql/execute.json/securbank/RBCOfferByPath';
   const offerpath = block.querySelector(':scope div:nth-child(1) > div a')?.innerHTML?.trim() || '';
   if (!offerpath) return;

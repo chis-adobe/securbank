@@ -126,6 +126,18 @@
     ]
   },
   {
+    "id": "account-offer-cards",
+    "fields": [
+      {
+        "component": "aem-content-fragment",
+        "name": "fragmentpath",
+        "value": "",
+        "label": "Account Offer Content Fragment path (one per row)",
+        "valueType": "string"
+      }
+    ]
+  },
+  {
     "id": "card",
     "fields": [
       {

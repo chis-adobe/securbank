@@ -2,8 +2,8 @@ import { getAEMPublish, getAEMAuthor } from '../../scripts/endpointconfig.js';
 
 /* eslint-disable no-underscore-dangle */
 export default async function decorate(block) {
-  const aempublishurl = getAEMPublish();
-  const aemauthorurl = getAEMAuthor();
+  const aempublishurl = await getAEMPublish();
+  const aemauthorurl = await getAEMAuthor();
   const persistedquery = '/graphql/execute.json/securbank/OfferByPath';
   const offerpath = block.querySelector(':scope div:nth-child(1) > div a').innerHTML.trim();
   let variationname = block.querySelector(':scope div:nth-child(2) > div').innerHTML.trim();

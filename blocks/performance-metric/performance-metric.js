@@ -18,8 +18,8 @@ function getImageName(image) {
 }
 
 export default async function decorate(block) {
-  const aempublishurl = getAEMPublish();
-  const aemauthorurl = getAEMAuthor();
+  const aempublishurl = await getAEMPublish();
+  const aemauthorurl = await getAEMAuthor();
   const persistedquery = '/graphql/execute.json/securbank/MetricByPath';
   const fragmentPath = block.querySelector(':scope div:nth-child(1) > div a')?.innerHTML?.trim() || '';
   if (!fragmentPath) return;
