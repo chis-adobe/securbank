@@ -160,6 +160,13 @@
         "value": "",
         "label": "Tag Id",
         "valueType": "string"
+      },
+      {
+        "component": "aem-content-fragment",
+        "name": "fragmentpath",
+        "value": "",
+        "label": "Content Fragment path (test)",
+        "valueType": "string"
       }
     ]
   },

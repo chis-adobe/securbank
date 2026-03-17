@@ -83,21 +83,6 @@
       "id": "blocks",
       "components": [
         {
-          "title": "Account Offer Card",
-          "id": "account-offer-card",
-          "plugins": {
-            "xwalk": {
-              "page": {
-                "resourceType": "core/franklin/components/block/v1/block",
-                "template": {
-                  "name": "Account Offer Card",
-                  "model": "account-offer-card"
-                }
-              }
-            }
-          }
-        },
-        {
           "title": "Account Offer Cards",
           "id": "account-offer-cards",
           "plugins": {
