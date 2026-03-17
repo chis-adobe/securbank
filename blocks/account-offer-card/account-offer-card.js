@@ -3,6 +3,38 @@ import { getAEMPublish, getAEMAuthor } from '../../scripts/endpointconfig.js';
 /* eslint-disable no-underscore-dangle */
 const PERSISTED_QUERY = '/graphql/execute.json/securbank/AccountOfferByPath';
 
+/**
+ * Equalize heights of account-offer-card grid items by row (pairs in 2-col layout).
+ * Run when block is inside .section.account-offer-card-container.
+ */
+function equalizeContainerRowHeights(containerSection) {
+  const items = Array.from(containerSection.children).filter(
+    (el) => el.classList.contains('account-offer-card-wrapper'),
+  );
+  if (items.length < 2) return;
+
+  const run = () => {
+    for (let i = 0; i < items.length; i += 2) {
+      const first = items[i];
+      const second = items[i + 1];
+      if (!second) break;
+      first.style.height = 'auto';
+      second.style.height = 'auto';
+      const h1 = first.offsetHeight;
+      const h2 = second.offsetHeight;
+      const maxH = Math.max(h1, h2);
+      first.style.height = `${maxH}px`;
+      second.style.height = `${maxH}px`;
+    }
+  };
+
+  run();
+  if (!containerSection.dataset.accountOfferCardEqualized) {
+    containerSection.dataset.accountOfferCardEqualized = 'true';
+    window.addEventListener('resize', run);
+  }
+}
+
 export default async function decorate(block) {
   const aempublishurl = await getAEMPublish();
   const aemauthorurl = await getAEMAuthor();
@@ -45,4 +77,12 @@ export default async function decorate(block) {
       </div>
     </div>
   `;
+
+  const containerSection = block.closest('.section.account-offer-card-container');
+  if (containerSection) {
+    requestAnimationFrame(() => {
+      equalizeContainerRowHeights(containerSection);
+    });
+    setTimeout(() => equalizeContainerRowHeights(containerSection), 500);
+  }
 }
