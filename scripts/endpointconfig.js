@@ -1,6 +1,6 @@
 import { fetchPlaceholders } from './aem.js';
 
-const DEFAULT_PNE = 'p130746-e1275972';
+const DEFAULT_PNE = 'p153659-e1614585';
 
 async function getAemPneFromPlaceholders(prefix) {
   const placeholders = await fetchPlaceholders(prefix);
