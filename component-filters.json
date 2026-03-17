@@ -26,12 +26,6 @@
     ]
   },
   {
-    "id": "account-offer-cards",
-    "components": [
-      "account-offer-card"
-    ]
-  },
-  {
     "id": "cards",
     "components": [
       "card"
