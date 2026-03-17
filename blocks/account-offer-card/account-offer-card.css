@@ -6,6 +6,18 @@
   margin-bottom: 24px;
 }
 
+/* In container: wrapper fills height, details grows so actions stay at bottom */
+.section.account-offer-card-container .account-offer-card.block > .account-offer-card-wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+.section.account-offer-card-container .account-offer-card.block > .account-offer-card-wrapper .account-offer-card-details {
+  flex: 1;
+  min-height: 0;
+}
+
 .account-offer-card-title {
   font-size: 24px;
   font-weight: 700;
