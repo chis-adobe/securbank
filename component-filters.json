@@ -21,6 +21,11 @@
       "featurearticles",
       "map",
       "offer",
+      "rbc-offer",
+      "rbc-offer-card",
+      "performance-metric",
+      "performance-statement",
+      "account-offer-cards",
       "forex",
       "form"
     ]
@@ -29,6 +34,12 @@
     "id": "cards",
     "components": [
       "card"
+    ]
+  },
+  {
+    "id": "account-offer-cards",
+    "components": [
+      "account-offer-card"
     ]
   },
   {
