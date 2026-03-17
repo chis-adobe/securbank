@@ -4,12 +4,12 @@ import { getAEMPublish, getAEMAuthor } from '../../scripts/endpointconfig.js';
 const PERSISTED_QUERY = '/graphql/execute.json/securbank/AccountOfferByPath';
 
 /**
- * Equalize heights of account-offer-card grid items by row (pairs in 2-col layout).
+ * Equalize heights of inner .account-offer-card-wrapper elements by row (pairs in 2-col layout).
  * Run when block is inside .section.account-offer-card-container.
  */
 function equalizeContainerRowHeights(containerSection) {
-  const items = Array.from(containerSection.children).filter(
-    (el) => el.classList.contains('account-offer-card-wrapper'),
+  const items = Array.from(
+    containerSection.querySelectorAll('.account-offer-card.block > .account-offer-card-wrapper'),
   );
   if (items.length < 2) return;
 
