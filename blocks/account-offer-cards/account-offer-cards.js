@@ -1,61 +1,12 @@
-import { getAEMPublish, getAEMAuthor } from '../../scripts/endpointconfig.js';
-
-const PERSISTED_QUERY = '/graphql/execute.json/securbank/AccountOfferByPath';
-
-async function fetchAccountOffer(baseUrl, path) {
-  const url = `${baseUrl}${PERSISTED_QUERY};path=${path};ts=${Math.random() * 1000}`;
-  const res = await fetch(url, { credentials: 'include' });
-  const json = await res.json();
-  return json?.data?.accountOfferByPath?.item || null;
-}
-
-function buildCardHtml(item, path) {
-  if (!item) return '';
-  const itemId = `urn:aemconnection:${path}/jcr:content/data/master`;
-  const title = item.title || '';
-  const offer = item.offer || '';
-  const detailsHtml = item.details?.html || '';
-  const ctaLabel = item.ctaLabel || 'Open an account';
-  const ctaUrl = item.ctaUrl || '#';
-
-  return `
-    <li class="account-offer-card" data-aue-resource="${itemId}" data-aue-label="account offer content fragment" data-aue-type="reference" data-aue-filter="cf">
-      <div class="account-offer-card-inner">
-        <h3 class="account-offer-card-title" data-aue-prop="title" data-aue-label="Title" data-aue-type="text">${title}</h3>
-        <p class="account-offer-card-offer" data-aue-prop="offer" data-aue-label="Offer" data-aue-type="text">${offer}</p>
-        ${detailsHtml ? `<div class="account-offer-card-details" data-aue-prop="details" data-aue-label="Details" data-aue-type="richtext">${detailsHtml}</div>` : ''}
-        <div class="account-offer-card-actions">
-          <a href="${ctaUrl}" class="account-offer-card-cta button primary" data-aue-prop="cta" data-aue-label="CTA">${ctaLabel}</a>
-          <a href="#" class="account-offer-card-learn-more">Learn more →</a>
-        </div>
-      </div>
-    </li>
-  `;
-}
-
-export default async function decorate(block) {
-  const aempublishurl = await getAEMPublish();
-  const aemauthorurl = await getAEMAuthor();
-  const baseUrl = window.location?.origin?.includes('author') ? aemauthorurl : aempublishurl;
-
-  const rows = [...block.children];
-  const paths = rows.map((row) => {
-    const link = row.querySelector(':scope div a');
-    return link ? link.textContent.trim() : '';
-  }).filter(Boolean);
-
-  if (!paths.length) return;
-
-  const ul = document.createElement('ul');
-  ul.className = 'account-offer-cards-list';
-
-  const cards = await Promise.all(paths.map((path) => fetchAccountOffer(baseUrl, path)));
-
-  cards.forEach((item, i) => {
-    const path = paths[i];
-    ul.insertAdjacentHTML('beforeend', buildCardHtml(item, path));
-  });
-
-  block.textContent = '';
-  block.appendChild(ul);
+/**
+ * Container block for account-offer-card blocks. Wraps children in a grid layout;
+ * each child account-offer-card block makes its own GraphQL request and renders its content.
+ */
+export default function decorate(block) {
+  const wrapper = document.createElement('div');
+  wrapper.className = 'account-offer-cards-list';
+  while (block.firstElementChild) {
+    wrapper.appendChild(block.firstElementChild);
+  }
+  block.appendChild(wrapper);
 }
