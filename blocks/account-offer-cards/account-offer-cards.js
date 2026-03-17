@@ -1,67 +1,48 @@
-import { getAEMPublish, getAEMAuthor } from '../../scripts/endpointconfig.js';
+import { createOptimizedPicture, decorateButtons } from '../../scripts/aem.js';
 import { moveInstrumentation } from '../../scripts/scripts.js';
 
-const PERSISTED_QUERY = '/graphql/execute.json/securbank/AccountOfferByPath';
-
-async function fetchAccountOffer(baseUrl, path) {
-  const url = `${baseUrl}${PERSISTED_QUERY};path=${path};ts=${Math.random() * 1000}`;
-  const res = await fetch(url, { credentials: 'include' });
-  const json = await res.json();
-  return json?.data?.accountOfferByPath?.item || null;
-}
-
-function buildCardInnerHtml(item, path) {
-  if (!item) return '';
-  const itemId = `urn:aemconnection:${path}/jcr:content/data/master`;
-  const title = item.title || '';
-  const offer = item.offer || '';
-  const detailsHtml = item.details?.html || '';
-  const ctaLabel = item.ctaLabel || 'Open an account';
-  const ctaUrl = item.ctaUrl || '#';
-
-  return `
-    <div class="account-offer-card-inner" data-aue-resource="${itemId}" data-aue-label="account offer content fragment" data-aue-type="reference" data-aue-filter="cf">
-      <h3 class="account-offer-card-title" data-aue-prop="title" data-aue-label="Title" data-aue-type="text">${title}</h3>
-      <p class="account-offer-card-offer" data-aue-prop="offer" data-aue-label="Offer" data-aue-type="text">${offer}</p>
-      ${detailsHtml ? `<div class="account-offer-card-details" data-aue-prop="details" data-aue-label="Details" data-aue-type="richtext">${detailsHtml}</div>` : ''}
-      <div class="account-offer-card-actions">
-        <a href="${ctaUrl}" class="account-offer-card-cta button primary" data-aue-prop="cta" data-aue-label="CTA">${ctaLabel}</a>
-        <a href="#" class="account-offer-card-learn-more">Learn more →</a>
-      </div>
-    </div>
-  `;
-}
-
-export default async function decorate(block) {
-  const aempublishurl = await getAEMPublish();
-  const aemauthorurl = await getAEMAuthor();
-  const baseUrl = window.location?.origin?.includes('author') ? aemauthorurl : aempublishurl;
-
-  const rows = [...block.children];
-  const rowPathPairs = rows.map((row) => {
-    const link = row.querySelector(':scope div a');
-    const path = link ? link.textContent.trim() : '';
-    return { row, path };
-  }).filter(({ path }) => path);
-
-  if (!rowPathPairs.length) return;
-
-  const paths = rowPathPairs.map(({ path }) => path);
+export default function decorate(block) {
   const ul = document.createElement('ul');
-  ul.className = 'account-offer-cards-list';
-
-  const cards = await Promise.all(paths.map((path) => fetchAccountOffer(baseUrl, path)));
-
-  rowPathPairs.forEach(({ row }, i) => {
-    const item = cards[i];
-    const path = paths[i];
+  [...block.children].forEach((row) => {
     const li = document.createElement('li');
-    li.className = 'account-offer-card';
     moveInstrumentation(row, li);
-    li.insertAdjacentHTML('afterbegin', buildCardInnerHtml(item, path));
-    ul.appendChild(li);
-  });
 
+    let tagId = null;
+    const cells = [...row.children];
+    if (cells.length >= 3) {
+      const tagIdCell = cells[2];
+      tagId = tagIdCell.textContent.trim();
+    }
+
+    while (row.firstElementChild) li.append(row.firstElementChild);
+
+    [...li.children].forEach((div, index) => {
+      if (div.children.length === 1 && div.querySelector('picture')) {
+        div.className = 'account-offer-card-image';
+      } else if (index === 2 && tagId) {
+        div.style.display = 'none';
+      } else {
+        div.className = 'account-offer-card-body';
+      }
+    });
+
+    if (tagId) {
+      li.querySelectorAll('a').forEach((a) => {
+        a.setAttribute('data-tag-id', tagId);
+      });
+    }
+
+    ul.append(li);
+  });
+  ul.querySelectorAll('img').forEach((img) => {
+    const optimizedPic = createOptimizedPicture(img.src, img.alt, false, [{ width: '750' }]);
+    moveInstrumentation(img, optimizedPic.querySelector('img'));
+    img.closest('picture').replaceWith(optimizedPic);
+  });
+  ul.querySelectorAll('a').forEach((a) => {
+    a.className = 'button secondary';
+    decorateButtons(a);
+  });
   block.textContent = '';
-  block.appendChild(ul);
+  block.append(ul);
 }

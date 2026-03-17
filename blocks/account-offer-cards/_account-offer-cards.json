@@ -36,10 +36,24 @@
       "id": "account-offer-card",
       "fields": [
         {
-          "component": "aem-content-fragment",
-          "name": "fragmentpath",
+          "component": "reference",
+          "valueType": "string",
+          "name": "image",
+          "label": "Image",
+          "multi": false
+        },
+        {
+          "component": "richtext",
+          "name": "text",
           "value": "",
-          "label": "Account Offer Content Fragment path",
+          "label": "Text",
+          "valueType": "string"
+        },
+        {
+          "component": "text-input",
+          "name": "tagId",
+          "value": "",
+          "label": "Tag Id",
           "valueType": "string"
         }
       ]
