@@ -85,3 +85,16 @@
 .account-offer-card-learn-more:hover {
   text-decoration: underline;
 }
+
+/* Container section: stack account-offer-card blocks */
+.section.account-offer-card-container > div {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+}
+
+@media (width >= 768px) {
+  .section.account-offer-card-container > div {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}

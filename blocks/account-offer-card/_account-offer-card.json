@@ -25,7 +25,8 @@
           "name": "fragmentpath",
           "value": "",
           "label": "Account Offer Content Fragment path",
-          "valueType": "string"
+          "valueType": "string",
+          "rootPath": "/content/dam/securbank/english/accounts/fragments"
         }
       ]
     }
