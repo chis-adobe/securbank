@@ -1,15 +1,15 @@
 {
   "mappings": [
-    "/content/securbank/en/:/",
-    "/content/securbank/en/placeholders:/placeholders.json",
-    "/content/securbank/en/loans/mortgagecalc:/mortgagecalc.json",
+    "/content/cibc-mellon/en/:/",
+    "/content/cibc-mellon/en/placeholders:/placeholders.json",
+    "/content/cibc-mellon/en/loans/mortgagecalc:/mortgagecalc.json",
     "/graphql:/graphql",
-    "/content/securbank.resource/icons/:/icons/",
-    "/content/securbank/en/configuration:/.helix/config.json"
+    "/content/cibc-mellon.resource/icons/:/icons/",
+    "/content/cibc-mellon/en/configuration:/.helix/config.json"
   ],
   "includes": [
-    "/content/securbank/en/",
-    "/content/dam/securbank/",
+    "/content/cibc-mellon/en/",
+    "/content/dam/cibc-mellon/",
     "/content/forms/af"
   ]
 }
