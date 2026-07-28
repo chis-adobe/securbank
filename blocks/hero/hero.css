@@ -18,11 +18,11 @@ main .hero {
 }
 
 main .hero .hero-body {
-  max-width: 1280px;
-  margin-left: auto;
-  margin-right: auto;
-  margin-bottom: 0;
-  color: white;
+  max-width: 520px;
+  margin: 0;
+  padding: 48px;
+  background: #fff;
+  color: var(--text-color);
   position: relative;
   z-index: 1;
 }
@@ -295,4 +295,60 @@ main .hero img {
     display: none;
   }
   
+}
+
+/* ---- CIBC Mellon hero: serif heading, paragraph h2, CTA + blue inset hover frame ---- */
+main .hero .hero-body h1 {
+  margin: 0 0 24px;
+  max-width: none;
+  color: var(--brand-teal);
+  font-family: var(--brand-serif-family);
+  font-weight: 400;
+  font-size: clamp(30px, 3.5vw, 44px);
+  line-height: 1.15;
+}
+
+main .hero .hero-body h2 {
+  margin: 0 0 32px;
+  max-width: none;
+  color: var(--text-color);
+  font-family: var(--body-font-family);
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 1.5;
+  text-align: left;
+}
+
+main .hero .hero-body a,
+main .hero .hero-body a.button:any-link {
+  display: inline-block;
+  margin: 0;
+  padding: 12px 28px;
+  border: 2px solid var(--brand-teal);
+  border-radius: 0;
+  background: #fff;
+  color: var(--brand-teal);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+main .hero .hero-body a:hover,
+main .hero .hero-body a.button:hover {
+  background: var(--brand-teal);
+  color: #fff;
+}
+
+/* blue frame drawn inward from the text-box edges, revealed on hover */
+main .hero .hero-body::after {
+  content: '';
+  position: absolute;
+  inset: 10px;
+  border: 2px solid var(--brand-frame);
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  pointer-events: none;
+}
+
+main .hero .hero-body:hover::after {
+  opacity: 1;
 }
