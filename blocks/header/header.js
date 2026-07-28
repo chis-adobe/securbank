@@ -107,14 +107,27 @@ export function decorateNavAuth() {
   });
 }
 
+// language roots available on this site; used to scope nav/footer fragments
+const LANGS = ['en', 'fr'];
+
+/**
+ * resolves the current language root from the URL, defaulting to 'en'
+ * e.g. /fr/creditcards -> 'fr', / or /creditcards -> 'en'
+ * @returns {string} the language segment
+ */
+function getLangRoot() {
+  const [, maybeLang] = window.location.pathname.split('/');
+  return LANGS.includes(maybeLang) ? maybeLang : 'en';
+}
+
 /**
  * decorates the header, mainly the nav
  * @param {Element} block The header block element
  */
 export default async function decorate(block) {
-  // load nav as fragment
+  // load nav as fragment for the current language root (default: en)
   const navMeta = getMetadata('nav');
-  const navPath = navMeta ? new URL(navMeta).pathname : '/nav';
+  const navPath = navMeta ? new URL(navMeta, window.location).pathname : `/${getLangRoot()}/nav`;
   const fragment = await loadFragment(navPath);
 
   // decorate nav DOM
