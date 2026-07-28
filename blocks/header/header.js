@@ -220,6 +220,14 @@ export default async function decorate(block) {
 
   nav.append(auth);
 
+  // language switcher (top-right): links to the other language's home
+  const lang = getLangRoot();
+  const langLink = document.createElement('a');
+  langLink.className = 'nav-language';
+  langLink.href = lang === 'fr' ? '/en' : '/fr';
+  langLink.textContent = lang === 'fr' ? 'English →' : 'Français →';
+  nav.append(langLink);
+
   const navWrapper = document.createElement('div');
   navWrapper.className = 'nav-wrapper';
   navWrapper.append(nav);
