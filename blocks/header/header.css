@@ -1,10 +1,16 @@
 /* header and nav layout */
 header .nav-wrapper {
-  background-color: var(--background-color);
+  background-color: var(--brand-teal);
   width: 100%;
   z-index: 50;
   position: fixed;
-  border-bottom: 1px solid var(--highlight-background-color);
+  border-bottom: 1px solid var(--brand-teal);
+}
+
+/* nav labels + links: white to match the CIBC Mellon header */
+header nav,
+header nav a:any-link {
+  color: #fff;
 }
 
 header nav {
@@ -75,7 +81,7 @@ header nav .nav-hamburger button {
   border: 0;
   border-radius: 0;
   padding: 0;
-  background-color: var(--background-color);
+  background-color: transparent;
   color: inherit;
   overflow: initial;
   text-overflow: initial;
@@ -176,7 +182,7 @@ header nav .nav-sections ul  {
   list-style: none;
   padding-left: 0;
   font-size: var(--body-font-size-s);
-  font-weight: 500;
+  font-weight: 600;
   justify-content: end;
 }
 
@@ -244,13 +250,13 @@ header nav .nav-sections ul > li:hover {
     display: flex;
     gap: 2em;
     margin: 0;
-    font-size: var(--body-font-size-xs);
+    font-size: 17px;
   }
 
   header nav .nav-sections .default-content-wrapper > ul > li {
     flex: 0 1 auto;
     position: relative;
-    font-weight: 500;
+    font-weight: 600;
   }
 
   header nav .nav-sections .default-content-wrapper > ul > li > ul {
