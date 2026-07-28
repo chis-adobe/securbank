@@ -25,9 +25,14 @@
   --highlight-background-color: #ccc;
   --text-color: #2c2c2c;
 
+  /* CIBC Mellon brand */
+  --brand-teal: #123a47;   /* nav background + hero heading */
+  --brand-frame: #0079c1;  /* blue inset hover frame */
+
   /* fonts */
   --body-font-family: 'adobe-clean', helvetica, ubuntu, roboto, noto, sans-serif;
   --heading-font-family: var(--body-font-family);
+  --brand-serif-family: georgia, 'Times New Roman', times, serif;
   --fixed-font-family: 'Roboto Mono', menlo, consolas, 'Liberation Mono', monospace;
 
   /* body sizes */
