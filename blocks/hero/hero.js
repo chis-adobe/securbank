@@ -113,10 +113,50 @@ function setupHeroAccordion(heroBody) {
   }
 }
 
+// Dynamic Media smart-crop sources, largest viewport first. "Portait" is spelled
+// to match the crop name defined on the DM asset (not a typo on our side).
+const HERO_SMART_CROPS = [
+  { name: 'Large', width: 2520, media: '(min-width: 900px)' },
+  { name: 'Medium', width: 1400, media: '(min-width: 600px)' },
+  { name: 'Portait', width: 1100, media: '(min-width: 400px)' },
+  { name: 'Small', width: 800 },
+];
+
+/**
+ * Builds a responsive <picture> from a Dynamic Media delivery URL — one <source>
+ * per smart crop so the browser serves the crop best suited to the width.
+ * @param {string} src the DM delivery URL (no query string)
+ * @param {string} alt alt text
+ * @returns {HTMLPictureElement}
+ */
+function buildSmartCropPicture(src, alt) {
+  const picture = document.createElement('picture');
+  HERO_SMART_CROPS.forEach(({ name, width, media }) => {
+    const source = document.createElement('source');
+    source.srcset = `${src}?smartcrop=${name}&width=${width}`;
+    if (media) source.media = media;
+    picture.append(source);
+  });
+  const fallback = HERO_SMART_CROPS[HERO_SMART_CROPS.length - 1];
+  const img = document.createElement('img');
+  img.src = `${src}?smartcrop=${fallback.name}&width=${fallback.width}`;
+  img.alt = alt || '';
+  img.loading = 'lazy';
+  picture.append(img);
+  return picture;
+}
+
 export default async function decorate(block) {
   let row = block.firstElementChild;
-  const bg = row.querySelector('picture');
-  block.append(bg);
+  let bg = row.querySelector('picture');
+  if (!bg) {
+    // Dynamic Media: the row holds an <a> to the delivery URL instead of a
+    // <picture>. Convert it to a smart-crop responsive picture. Anything else
+    // (no DM anchor) falls through and renders as before.
+    const dmLink = row.querySelector('a[href*="/adobe/assets/"]');
+    if (dmLink) bg = buildSmartCropPicture(dmLink.getAttribute('href'), dmLink.textContent.trim());
+  }
+  if (bg) block.append(bg);
   row.remove();
   const bgP = block.closest('p');
   if (bgP) bgP.remove();
