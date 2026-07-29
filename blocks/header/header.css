@@ -53,9 +53,13 @@ header nav[aria-expanded="true"] {
 
 
 @media (width >= 900px) {
-  /* two-row header: brand + Français on top, section links on the bottom left */
+  /* two-row header: brand + Français on top, section links on the bottom left.
+     The spacer (header) and the fixed nav must share the SAME explicit height,
+     or the fixed nav leaves a white gap / overlaps the hero. Explicit height is
+     used (not min-height) because header nav[aria-expanded="true"] sets
+     min-height: 0 at desktop, which would otherwise collapse the bar. */
   header {
-    height: 120px;
+    height: 100px;
   }
 
   header nav {
@@ -64,8 +68,7 @@ header nav[aria-expanded="true"] {
     place-content: center flex-start;
     gap: 6px 2em;
     margin: 0 auto;
-    height: auto;
-    min-height: 120px;
+    height: 100px;
   }
 
   header nav .nav-brand {
