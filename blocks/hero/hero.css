@@ -366,8 +366,11 @@ main .hero .hero-body > div:not(.login):hover::after {
   display: none;
 }
 
-/* ---- mobile: text + login cards become accordion panels ---- */
-@media (width < 900px) {
+/* ---- responsive: text + login cards become accordion panels ----
+   Breakpoint at 1194px (iPad Pro 11" landscape) so the desktop layout starts
+   above 1050px, skipping the 900-1050px range where securbank's legacy
+   `.login { display: none }` would otherwise hide the login card. */
+@media (width < 1194px) {
   /* stack the cards: login (collapsed) on top, text (expanded) below */
   main .hero .hero-body {
     flex-direction: column;
