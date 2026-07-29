@@ -17,14 +17,22 @@ main .hero {
   color: var(--background-color);
 }
 
+/* hero-body is the full-width container (aligned to the nav), holding two cards */
 main .hero .hero-body {
-  max-width: 520px;
-  margin: 0;
-  padding: 48px;
-  background: #fff;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0;
   color: var(--text-color);
   position: relative;
   z-index: 1;
+}
+
+/* the text card (white box, left) — everything in hero-body except the login card */
+main .hero .hero-body > div:not(.login) {
+  position: relative;
+  max-width: 520px;
+  padding: 48px;
+  background: #fff;
 }
 
 main .hero h1 {
@@ -85,8 +93,8 @@ main .hero img {
   position: absolute;
   width: 370px;
   height: 392px;
-  left: 909px;
-  top: -110px;
+  right: 0;
+  top: 0;
   overflow: visible;
   background-color: white;
 }
@@ -206,8 +214,6 @@ main .hero img {
   #log-in {
     width: 300px;
     height: 392px;
-    left: 730px;
-    top: -110px;
   }
 
   #log-in .login-form-input {
@@ -227,15 +233,14 @@ main .hero img {
   position: absolute;
   width: 370px;
   height: 245px;
-  left: 909px;
-  top: -35px;
+  right: 0;
+  top: 0;
   overflow: visible;
   background-color: white;
 }
 
 @media (width <= 1280px) {
   .user-info {
-    left: 730px;
     width: 300px;
   }
 }
@@ -339,7 +344,7 @@ main .hero .hero-body a.button:hover {
 }
 
 /* blue frame drawn inward from the text-box edges, revealed on hover */
-main .hero .hero-body::after {
+main .hero .hero-body > div:not(.login)::after {
   content: '';
   position: absolute;
   inset: 0;
@@ -350,6 +355,6 @@ main .hero .hero-body::after {
   pointer-events: none;
 }
 
-main .hero .hero-body:hover::after {
+main .hero .hero-body > div:not(.login):hover::after {
   opacity: 1;
 }
