@@ -224,7 +224,8 @@ export default async function decorate(block) {
   const lang = getLangRoot();
   const langLink = document.createElement('a');
   langLink.className = 'nav-language';
-  langLink.href = lang === 'fr' ? '/en' : '/fr';
+  // English home is served at '/', French home at '/fr'
+  langLink.href = lang === 'fr' ? '/' : '/fr';
   langLink.textContent = lang === 'fr' ? 'English →' : 'Français →';
   nav.append(langLink);
 
