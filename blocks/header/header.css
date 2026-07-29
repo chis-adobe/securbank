@@ -52,7 +52,7 @@ header nav[aria-expanded="true"] {
 }
 
 
-@media (width >= 900px) {
+@media (width >= 1194px) {
   /* two-row header: brand + Français on top, section links on the bottom left.
      The spacer (header) and the fixed nav must share the SAME explicit height,
      or the fixed nav leaves a white gap / overlaps the hero. Explicit height is
@@ -177,7 +177,7 @@ header nav[aria-expanded="true"] .nav-hamburger-icon::after {
   transform: rotate(-45deg);
 }
 
-@media (width >= 900px) {
+@media (width >= 1194px) {
   header nav .nav-hamburger {
     display: none;
     visibility: hidden;
@@ -245,7 +245,7 @@ header nav .nav-sections ul > li:hover {
   text-decoration: none;
 }
 
-@media (width >= 900px) {
+@media (width >= 1194px) {
   header nav .nav-sections {
     display: block;
     visibility: visible;
@@ -340,7 +340,7 @@ header nav .nav-auth button {
   display:none;
 }
 
-@media (width >= 900px) {
+@media (width >= 1194px) {
   header nav .nav-auth button {
     display:unset;
     color: var(--text-color);

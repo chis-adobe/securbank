@@ -7,7 +7,7 @@ import { loadFragment } from '../fragment/fragment.js';
 import authenticate from './auth.js';
 
 // media query match that indicates mobile/tablet width
-const isDesktop = window.matchMedia('(min-width: 900px)');
+const isDesktop = window.matchMedia('(min-width: 1194px)');
 const LOGIN_FORM = `<button type="button" aria-label="Login">
 <span>Sign in</span>
 </button>`;
