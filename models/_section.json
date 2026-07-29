@@ -87,7 +87,8 @@
         "form",
         "embed-adaptive-form",
         "embed-form",
-        "form-chatbot"
+        "form-chatbot",
+        "nav"
       ]
     }
   ]

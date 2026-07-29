@@ -1,0 +1,62 @@
+.nav-accordion {
+  border: 1px solid #d9d9de;
+  padding: 16px 20px;
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+.nav-accordion ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-accordion > ul > li {
+  padding: 4px 0;
+}
+
+.nav-accordion a {
+  color: var(--link-color, #006b71);
+  text-decoration: none;
+}
+
+.nav-accordion a:hover {
+  text-decoration: underline;
+}
+
+.nav-accordion a.active,
+.nav-accordion a[aria-current="page"] {
+  font-weight: 700;
+}
+
+/* Expandable group: [toggle] [label] [submenu] */
+.nav-group > .nav-toggle {
+  border: 0;
+  background: none;
+  cursor: pointer;
+  color: inherit;
+  font: inherit;
+  width: 1em;
+  padding: 0;
+  margin-right: 6px;
+  text-align: center;
+  line-height: 1;
+}
+
+.nav-group > .nav-toggle::before {
+  content: "+";
+}
+
+.nav-group.open > .nav-toggle::before {
+  content: "\2013"; /* – */
+}
+
+/* Submenu hidden until its group is open */
+.nav-submenu {
+  display: none;
+  padding-left: 22px;
+}
+
+.nav-group.open > .nav-submenu {
+  display: block;
+}
