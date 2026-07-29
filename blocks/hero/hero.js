@@ -83,6 +83,36 @@ function decorateUnAuthenticatedState(parent) {
   parent.append(loginForm);
 }
 
+/**
+ * Sets up the two hero cards as mobile accordion panels (all visuals in CSS).
+ * The text card is open by default and reuses its h1 as the panel title; the
+ * login card is collapsed by default under an injected "Login" header.
+ * @param {Element} heroBody the .hero-body container
+ */
+function setupHeroAccordion(heroBody) {
+  const textCard = heroBody.querySelector(':scope > div:not(.login)');
+  if (textCard) {
+    textCard.classList.add('hero-text', 'open');
+    const h1 = textCard.querySelector('h1');
+    if (h1) {
+      // h1 doubles as the collapsed title; mirror it to title="" for the tooltip
+      // shown when the single-line title is truncated
+      textCard.setAttribute('title', h1.textContent);
+      h1.addEventListener('click', () => textCard.classList.toggle('open'));
+    }
+  }
+
+  const loginCard = heroBody.querySelector(':scope > .login');
+  if (loginCard) {
+    const header = document.createElement('button');
+    header.type = 'button';
+    header.className = 'hero-accordion-header';
+    header.textContent = 'Login';
+    header.addEventListener('click', () => loginCard.classList.toggle('open'));
+    loginCard.prepend(header);
+  }
+}
+
 export default async function decorate(block) {
   let row = block.firstElementChild;
   const bg = row.querySelector('picture');
@@ -97,4 +127,6 @@ export default async function decorate(block) {
   if (block.classList.contains('authbox')) {
     window.localStorage.getItem('auth') === null ? decorateUnAuthenticatedState(row) : decorateAuthenticatedState(row, JSON.parse(window.localStorage.getItem('auth')));
   }
+
+  setupHeroAccordion(row);
 }
