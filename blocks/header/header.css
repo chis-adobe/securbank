@@ -285,6 +285,15 @@ header nav .nav-sections ul > li:hover {
     transform: rotate(315deg);
   }
 
+  /* primary links (first ul) on the left, utility links (Client Access, second
+     ul) pushed to the right */
+  header nav .nav-sections .default-content-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 2em;
+  }
+
   header nav .nav-sections ul {
     display: flex;
     gap: 2em;
