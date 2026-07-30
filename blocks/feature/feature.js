@@ -17,7 +17,9 @@ export default async function decorate(block) {
   callOutWrapper.classList.add('feature-callout-wrapper');
   /* eslint prefer-destructuring: ["error", {VariableDeclarator: {object: true}}] */
   row = block.getElementsByTagName('div')[4];
-  const placeholders = await fetchPlaceholders('');
+  // Delivery serves raw content paths (paths.json mappings aren't applied), so the
+  // placeholders sheet only resolves at /content/cibc-mellon/en/placeholders.json.
+  const placeholders = await fetchPlaceholders('/content/cibc-mellon/en');
   const { interestrate } = placeholders;
   const interest = document.createElement('p');
   interest.classList.add('feature-interest-rate');
