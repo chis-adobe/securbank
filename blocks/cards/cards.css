@@ -315,3 +315,31 @@
   margin: unset;
   max-width: 100%;
 }
+
+/* Single-card cards block: lay out horizontally with the image on the right
+   (card DOM order is image-first, so row-reverse puts text left / image right).
+   Only applies when the block has exactly one card; stacks below 900px. */
+.cards > ul:has(> li:only-child) {
+  display: block;
+}
+
+@media (width >= 900px) {
+  .cards > ul > li:only-child {
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+    gap: 48px;
+    border: none;
+    background-color: transparent;
+  }
+
+  .cards > ul > li:only-child > .cards-card-body,
+  .cards > ul > li:only-child > .cards-card-image {
+    flex: 1 1 0;
+    margin: 0;
+  }
+
+  .cards > ul > li:only-child .cards-card-image img {
+    aspect-ratio: 16 / 10;
+  }
+}
