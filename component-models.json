@@ -5507,5 +5507,24 @@
         "valueType": "string"
       }
     ]
+  },
+  {
+    "id": "search",
+    "fields": [
+      {
+        "component": "text-input",
+        "name": "placeholder",
+        "value": "",
+        "label": "Placeholder",
+        "valueType": "string"
+      },
+      {
+        "component": "text-input",
+        "name": "source",
+        "value": "",
+        "label": "Query index path (default /query-index.json)",
+        "valueType": "string"
+      }
+    ]
   }
 ]
