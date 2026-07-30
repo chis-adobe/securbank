@@ -1,0 +1,56 @@
+.article {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.article-hero {
+  margin: 0 0 24px;
+}
+
+.article-hero img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+}
+
+.article-headline {
+  font-size: 36px;
+  line-height: 1.2;
+  margin: 0 0 20px;
+}
+
+.article-author {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 0 0 28px;
+}
+
+.article-author-pic {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex: 0 0 auto;
+}
+
+.article-author-meta {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.3;
+}
+
+.article-author-name {
+  font-weight: 700;
+}
+
+.article-author-role {
+  font-size: 14px;
+  opacity: 0.7;
+}
+
+.article-body p {
+  margin: 0 0 1em;
+  line-height: 1.6;
+}
