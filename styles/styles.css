@@ -242,13 +242,12 @@ main .section {
   }
 }
 
-/* Retiree template — two-section layout: left nav section ("retiree") beside
-   the page content section ("content"), replacing the old columns block.
-   Scoped to the template via the body class that decorateTemplateAndTheme adds
-   from the page's `template` metadata (template=retiree-page), so no other
-   pages are affected. Below 900px the sections stack (nav on top). */
+/* Two-section sidebar layout: the left section holds the `nav` block, the right
+   section holds the page content. Scoped to any <main> that contains a nav
+   block, so only side-nav pages are affected — no template metadata required.
+   Below 900px the sections stack (nav on top). */
 @media (width >= 900px) {
-  body.retiree-page main {
+  main:has(.nav) {
     display: grid;
     grid-template-columns: minmax(220px, 280px) minmax(0, 1fr);
     gap: 48px;
@@ -259,7 +258,7 @@ main .section {
 
   /* The grid tracks control width here, so undo the global centring/max-width
      that `.section > div` applies at this breakpoint. */
-  body.retiree-page main > .section > div {
+  main:has(.nav) > .section > div {
     max-width: none;
     margin: 0;
   }
