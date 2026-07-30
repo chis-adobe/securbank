@@ -150,29 +150,30 @@ a:hover {
   color: var(--link-hover-color);
 }
 
-/* buttons */
+/* buttons — outlined rectangular CTA (matches the CIBC Mellon design) */
 a.button:any-link, button {
   font-family: var(--body-font-family);
   display: inline-block;
   box-sizing: border-box;
   text-decoration: none;
-  border: 2px solid transparent;
-  padding: 5px 30px;
+  border: 1px solid var(--text-color);
+  padding: 12px 28px;
   text-align: center;
   font-style: normal;
   font-weight: 600;
   cursor: pointer;
-  color: var(--background-color);
-  background-color: var(--link-color);
+  color: var(--text-color);
+  background-color: transparent;
   margin: 16px 0;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  border-radius: 30px;
+  border-radius: 0;
 }
 
 a.button:hover, a.button:focus, button:hover, button:focus  {
-  background-color: var(--link-hover-color);
+  background-color: var(--text-color);
+  color: var(--background-color);
   cursor: pointer;
 }
 
