@@ -12,36 +12,46 @@ function resolveImage(img, pub) {
 
 /**
  * Build the hero <figure>. When the CF image exposes Dynamic Media smart crops
- * (_dmS7Url + _smartCrops), emit a responsive <img> with one `s7url:CropName`
- * candidate per crop (with its width descriptor) so the browser picks the crop
- * best fitting the container and screen/DPR. Otherwise fall back to the plain
- * delivery URL.
+ * (_dmS7Url + _smartCrops), pick the smallest crop that still covers the hero
+ * container width and re-evaluate on resize, swapping img.src to the matching
+ * `s7url:CropName`. This is driven in JS on purpose: native srcset/sizes only
+ * ever upgrades to a larger candidate and never reverts to a smaller crop when
+ * the screen narrows again. Falls back to the plain delivery URL when there are
+ * no smart crops.
  */
 function buildHero(heroImage, pub, alt) {
   if (!heroImage) return null;
   const img = document.createElement('img');
   img.alt = alt || '';
 
-  const s7 = heroImage._dmS7Url;
-  const crops = Array.isArray(heroImage._smartCrops)
-    ? heroImage._smartCrops.filter((c) => c && c.name && c.width)
-    : [];
-
-  if (s7 && crops.length) {
-    const sorted = [...crops].sort((a, b) => a.width - b.width);
-    img.srcset = sorted.map((c) => `${s7}:${c.name} ${c.width}w`).join(', ');
-    // Article content column: ~800px on desktop, full width below the layout breakpoint.
-    img.sizes = '(min-width: 900px) 800px, 100vw';
-    img.src = `${s7}:${sorted[sorted.length - 1].name}`;
-  } else {
-    const src = resolveImage(heroImage, pub);
-    if (!src) return null;
-    img.src = src;
-  }
-
   const figure = document.createElement('figure');
   figure.className = 'article-hero';
   figure.append(img);
+
+  const s7 = heroImage._dmS7Url;
+  const crops = Array.isArray(heroImage._smartCrops)
+    ? heroImage._smartCrops.filter((c) => c && c.name && c.width).sort((a, b) => a.width - b.width)
+    : [];
+
+  if (s7 && crops.length) {
+    const applyCrop = () => {
+      const width = figure.clientWidth || window.innerWidth || 0;
+      const crop = crops.find((c) => c.width >= width) || crops[crops.length - 1];
+      const next = `${s7}:${crop.name}`;
+      if (img.getAttribute('src') !== next) img.setAttribute('src', next);
+    };
+    applyCrop();
+    if (typeof ResizeObserver !== 'undefined') {
+      new ResizeObserver(applyCrop).observe(figure);
+    } else {
+      window.addEventListener('resize', applyCrop);
+    }
+  } else {
+    const src = resolveImage(heroImage, pub);
+    if (!src) return null;
+    img.setAttribute('src', src);
+  }
+
   return figure;
 }
 
