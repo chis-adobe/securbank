@@ -121,6 +121,67 @@ function getLangRoot() {
 }
 
 /**
+ * Turns the nav's search icon into a click-to-expand search bar. Pressing Enter
+ * navigates to the language's search page with the term as a `q` query param,
+ * which the search block on that page reads to run the search.
+ * @param {Element} nav the decorated nav element
+ * @param {string} lang the current language root
+ */
+function setupNavSearch(nav, lang) {
+  const tools = nav.querySelector('.nav-tools');
+  const icon = tools?.querySelector('.icon-search');
+  if (!tools || !icon) return;
+
+  const toggle = icon.closest('p') || icon;
+  toggle.classList.add('nav-search-toggle');
+  toggle.setAttribute('role', 'button');
+  toggle.setAttribute('tabindex', '0');
+  toggle.setAttribute('aria-label', 'Search');
+
+  const form = document.createElement('form');
+  form.className = 'nav-search';
+  form.setAttribute('role', 'search');
+  const input = document.createElement('input');
+  input.type = 'search';
+  input.className = 'nav-search-input';
+  input.placeholder = 'Search';
+  input.setAttribute('aria-label', 'Search');
+  form.append(input);
+  tools.append(form);
+
+  const open = () => {
+    tools.classList.add('search-open');
+    input.focus();
+  };
+  const close = () => tools.classList.remove('search-open');
+  const onToggle = (e) => {
+    e.preventDefault();
+    if (tools.classList.contains('search-open')) close();
+    else open();
+  };
+
+  toggle.addEventListener('click', onToggle);
+  toggle.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' || e.key === ' ') onToggle(e);
+  });
+  input.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') close();
+  });
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const q = input.value.trim();
+    if (!q) {
+      input.focus();
+      return;
+    }
+    window.location.href = `/${lang}/search?q=${encodeURIComponent(q)}`;
+  });
+  document.addEventListener('click', (e) => {
+    if (!tools.contains(e.target)) close();
+  });
+}
+
+/**
  * decorates the header, mainly the nav
  * @param {Element} block The header block element
  */
@@ -228,6 +289,9 @@ export default async function decorate(block) {
   langLink.href = lang === 'fr' ? '/' : '/fr';
   langLink.textContent = lang === 'fr' ? 'English →' : 'Français →';
   nav.append(langLink);
+
+  // expandable search in the nav tools
+  setupNavSearch(nav, lang);
 
   const navWrapper = document.createElement('div');
   navWrapper.className = 'nav-wrapper';

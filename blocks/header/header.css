@@ -334,6 +334,9 @@ header nav .nav-sections ul > li:hover {
 /* tools */
 header nav .nav-tools {
   grid-area: tools;
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
 header nav .nav-auth button {
@@ -346,4 +349,44 @@ header nav .nav-auth button {
     color: var(--text-color);
     background-color: rgb(243 246 242);
   }
+}
+
+/* nav search: white icon + click-to-expand search bar */
+header nav .nav-search-toggle {
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+}
+
+header nav .icon-search img,
+header nav .icon-search svg {
+  width: 22px;
+  height: 22px;
+  filter: brightness(0) invert(1); /* render the search glyph white */
+}
+
+header nav .nav-search {
+  width: 0;
+  overflow: hidden;
+  display: flex;
+  transition: width 0.25s ease;
+}
+
+header nav .nav-tools.search-open .nav-search {
+  width: 200px;
+}
+
+header nav .nav-search-input {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 6px 10px;
+  border: 1px solid rgb(255 255 255 / 60%);
+  border-radius: 4px;
+  background: rgb(255 255 255 / 12%);
+  color: #fff;
+  font-size: 14px;
+}
+
+header nav .nav-search-input::placeholder {
+  color: rgb(255 255 255 / 70%);
 }
