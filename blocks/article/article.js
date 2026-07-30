@@ -10,6 +10,41 @@ function resolveImage(img, pub) {
   return img._publishUrl || '';
 }
 
+/**
+ * Build the hero <figure>. When the CF image exposes Dynamic Media smart crops
+ * (_dmS7Url + _smartCrops), emit a responsive <img> with one `s7url:CropName`
+ * candidate per crop (with its width descriptor) so the browser picks the crop
+ * best fitting the container and screen/DPR. Otherwise fall back to the plain
+ * delivery URL.
+ */
+function buildHero(heroImage, pub, alt) {
+  if (!heroImage) return null;
+  const img = document.createElement('img');
+  img.alt = alt || '';
+
+  const s7 = heroImage._dmS7Url;
+  const crops = Array.isArray(heroImage._smartCrops)
+    ? heroImage._smartCrops.filter((c) => c && c.name && c.width)
+    : [];
+
+  if (s7 && crops.length) {
+    const sorted = [...crops].sort((a, b) => a.width - b.width);
+    img.srcset = sorted.map((c) => `${s7}:${c.name} ${c.width}w`).join(', ');
+    // Article content column: ~800px on desktop, full width below the layout breakpoint.
+    img.sizes = '(min-width: 900px) 800px, 100vw';
+    img.src = `${s7}:${sorted[sorted.length - 1].name}`;
+  } else {
+    const src = resolveImage(heroImage, pub);
+    if (!src) return null;
+    img.src = src;
+  }
+
+  const figure = document.createElement('figure');
+  figure.className = 'article-hero';
+  figure.append(img);
+  return figure;
+}
+
 export default async function decorate(block) {
   const cells = [...block.querySelectorAll(':scope > div > div')];
   const articlepath = (cells[0]?.querySelector('a')?.textContent || cells[0]?.textContent || '').trim();
@@ -40,16 +75,8 @@ export default async function decorate(block) {
   const article = document.createElement('article');
   article.className = 'article';
 
-  const heroSrc = resolveImage(item.heroImage, pub);
-  if (heroSrc) {
-    const figure = document.createElement('figure');
-    figure.className = 'article-hero';
-    const img = document.createElement('img');
-    img.src = heroSrc;
-    img.alt = item.headline || '';
-    figure.append(img);
-    article.append(figure);
-  }
+  const hero = buildHero(item.heroImage, pub, item.headline);
+  if (hero) article.append(hero);
 
   if (item.headline) {
     const h1 = document.createElement('h1');
