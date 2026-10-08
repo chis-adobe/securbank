@@ -26,9 +26,13 @@ export default async function decorate(block) {
       return offer || {};
     });
 
-  const heroImageUrl = cfReq.heroImage?._dynamicUrl
+  /* const heroImageUrl = cfReq.heroImage?._dynamicUrl
     ? `background-image: url(${aempublishurl + cfReq.heroImage._dynamicUrl});`
-    : '';
+    : ''; */
+
+  const heroImageUrl = cfReq.heroImage?._publishUrl
+    ? `background-image: url(${cfReq.heroImage._publishUrl});`
+    : ''; 
 
   const itemId = `urn:aemconnection:${offerpath}/jcr:content/data/master`;
 
