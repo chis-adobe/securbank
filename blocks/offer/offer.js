@@ -30,8 +30,8 @@ export default async function decorate(block) {
     ? `background-image: url(${aempublishurl + cfReq.heroImage._dynamicUrl});`
     : ''; */
 
-  const heroImageUrl = cfReq.heroImage?._publishUrl
-    ? `background-image: url(${cfReq.heroImage._publishUrl});`
+  const heroImageUrl = cfReq.heroImage?._dmS7Url
+    ? `background-image: url(${cfReq.heroImage._dmS7Url});`
     : ''; 
 
   const itemId = `urn:aemconnection:${offerpath}/jcr:content/data/master`;
